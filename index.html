@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#244b32">
+  <meta name="description" content="Organize atividades, insumos e safras da sua propriedade rural, mesmo sem internet.">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <title>Agenda Rural</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon.svg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#inicio" aria-label="Agenda Rural - início"><span class="brand-mark">🌱</span><span><strong>Agenda Rural</strong><small>Seu campo organizado</small></span></a>
+      <div class="top-actions"><span id="connection-status" class="connection"><i></i><span>Conectado</span></span><button id="install-button" class="install-button" hidden>Instalar app</button></div>
+    </header>
+
+    <main>
+      <section id="inicio" class="page active" aria-labelledby="welcome-title">
+        <div class="welcome"><div><p class="eyebrow">BEM-VINDO À SUA PROPRIEDADE</p><h1 id="welcome-title">Bom trabalho começa<br>com organização.</h1><p>Registre o dia a dia da roça — seus dados ficam salvos neste aparelho, até sem internet.</p></div><div class="welcome-art" aria-hidden="true">🌾</div></div>
+        <div class="stats-grid" aria-label="Resumo da propriedade">
+          <article class="stat-card"><span class="stat-icon">📋</span><span class="stat-label">Atividades pendentes</span><strong id="stat-activities">0</strong></article>
+          <article class="stat-card"><span class="stat-icon">🧺</span><span class="stat-label">Insumos cadastrados</span><strong id="stat-stock">0</strong></article>
+          <article class="stat-card"><span class="stat-icon">🌱</span><span class="stat-label">Safras em andamento</span><strong id="stat-harvests">0</strong></article>
+        </div>
+        <div class="section-heading"><div><p class="eyebrow">ORGANIZE SUA ROTINA</p><h2>Acesso rápido</h2></div></div>
+        <div class="quick-grid">
+          <button class="quick-card" data-open="atividades"><span>📋</span><strong>Atividades</strong><small>Planeje e acompanhe tarefas</small></button>
+          <button class="quick-card" data-open="estoque"><span>🧺</span><strong>Estoque</strong><small>Controle seus insumos</small></button>
+          <button class="quick-card" data-open="safras"><span>🌿</span><strong>Safras</strong><small>Registre seus plantios</small></button>
+        </div>
+        <div class="section-heading recent-heading"><div><p class="eyebrow">O QUE VEM POR AÍ</p><h2>Próximas atividades</h2></div><button class="text-button" data-open="atividades">Ver todas</button></div>
+        <div id="upcoming-list" class="record-list"><div class="empty-state">Nenhuma atividade cadastrada. Adicione uma tarefa para começar.</div></div>
+        <aside class="offline-note"><span>📴</span><div><strong>Funciona offline</strong><p>Suas informações ficam salvas com segurança neste aparelho. A sincronização entre dispositivos não está habilitada nesta versão.</p></div></aside>
+      </section>
+
+      <section id="atividades" class="page" aria-labelledby="activities-title">
+        <div class="page-heading"><div><p class="eyebrow">PLANEJAMENTO</p><h1 id="activities-title">Atividades</h1><p>Organize as tarefas da propriedade.</p></div><button class="primary-button" data-form="activity">＋ Nova atividade</button></div>
+        <div class="filter-row"><label class="search-box"><span>⌕</span><input id="activity-search" type="search" placeholder="Buscar atividade" aria-label="Buscar atividade"></label><select id="activity-filter" aria-label="Filtrar atividades"><option value="all">Todas</option><option value="pending">Pendentes</option><option value="done">Concluídas</option></select></div>
+        <div id="activities-list" class="record-list"></div>
+      </section>
+
+      <section id="estoque" class="page" aria-labelledby="stock-title">
+        <div class="page-heading"><div><p class="eyebrow">CONTROLE DE INSUMOS</p><h1 id="stock-title">Estoque</h1><p>Acompanhe os produtos disponíveis.</p></div><button class="primary-button" data-form="stock">＋ Novo insumo</button></div>
+        <div class="filter-row"><label class="search-box"><span>⌕</span><input id="stock-search" type="search" placeholder="Buscar insumo" aria-label="Buscar insumo"></label></div>
+        <div id="stock-list" class="record-list"></div>
+      </section>
+
+      <section id="safras" class="page" aria-labelledby="harvests-title">
+        <div class="page-heading"><div><p class="eyebrow">CICLO DE PRODUÇÃO</p><h1 id="harvests-title">Safras</h1><p>Guarde os registros de cada plantio.</p></div><button class="primary-button" data-form="harvest">＋ Nova safra</button></div>
+        <div id="harvests-list" class="record-list"></div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="Navegação principal">
+      <button class="nav-item active" data-page="inicio"><span>⌂</span><small>Início</small></button>
+      <button class="nav-item" data-page="atividades"><span>▤</span><small>Atividades</small></button>
+      <button class="nav-item" data-page="estoque"><span>▦</span><small>Estoque</small></button>
+      <button class="nav-item" data-page="safras"><span>♧</span><small>Safras</small></button>
+    </nav>
+  </div>
+
+  <dialog id="record-dialog" class="record-dialog"><form id="record-form" method="dialog"><div class="dialog-heading"><div><p id="form-eyebrow" class="eyebrow">NOVO REGISTRO</p><h2 id="form-title">Adicionar</h2></div><button type="button" class="icon-button" id="close-dialog" aria-label="Fechar">✕</button></div><div id="form-fields" class="form-fields"></div><div class="form-actions"><button type="button" class="secondary-button" id="cancel-dialog">Cancelar</button><button type="submit" class="primary-button">Salvar registro</button></div></form></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="app.js" defer></script>
+</body>
+</html>

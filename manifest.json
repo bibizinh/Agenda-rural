@@ -1,0 +1,17 @@
+{
+  "id": "agenda-rural",
+  "name": "Agenda Rural",
+  "short_name": "Agenda Rural",
+  "description": "Agenda de atividades, estoque de insumos e safras para produtores rurais.",
+  "lang": "pt-BR",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#fbfaf6",
+  "theme_color": "#244b32",
+  "categories": ["productivity", "business"],
+  "icons": [
+    { "src": "icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
